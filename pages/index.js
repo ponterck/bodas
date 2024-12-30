@@ -55,7 +55,7 @@ export default function Home() {
                           Ubicación de la Parroquia - Horario misa:  12:00
                         </Link>
                         <Link href='https://maps.app.goo.gl/ANZJ6hUrXoUfuDKTA' className="text-black text-sm sm:text-base md:text-lg  underline mt-3">
-                          Ubicación del salón - Horario fiesta: 12:00
+                          Ubicación del salón - Horario fiesta: 2:00
                         </Link>
                       </div>
                     </div>
