@@ -52,10 +52,10 @@ export default function Home() {
                     <div className="absolute inset-0 flex items-end justify-end bg-opacity-50">
                       <div className="absolute bottom-0 left-0 w-full bg-opacity-50 flex flex-col items-center justify-start h-[40%] px-4">
                         <Link href='https://maps.app.goo.gl/acwNcjczUBkrt5wPA' className="text-black text-sm sm:text-base md:text-lg underline mt-3">
-                          Ubicación de la Parroquia
+                          Ubicación de la Parroquia - Horario misa:  12:00
                         </Link>
                         <Link href='https://maps.app.goo.gl/ANZJ6hUrXoUfuDKTA' className="text-black text-sm sm:text-base md:text-lg  underline mt-3">
-                          Ubicación del salon
+                          Ubicación del salón - Horario fiesta: 12:00
                         </Link>
                       </div>
                     </div>
