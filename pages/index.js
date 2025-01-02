@@ -40,7 +40,7 @@ export default function Home() {
 
                 {/* Segundo Item */}
                 <CarouselItem className="p-5">
-                  <div className="relative flex flex-col items-center justify-center max-w-full bg-black bg-opacity-50 p-2 rounded-lg border">
+                  <div className="relative flex flex-col items-center justify-center max-w-full bg-yellow-100 bg-opacity-50 p-2 rounded-lg border">
                     <Image
                       className="w-full object-cover"
                       src={fotodos}
@@ -51,10 +51,10 @@ export default function Home() {
 
                     <div className="absolute inset-0 flex items-end justify-end bg-opacity-50">
                       <div className="absolute bottom-0 left-0 w-full bg-opacity-50 flex flex-col items-center justify-start h-[40%] px-4">
-                        <Link href='https://maps.app.goo.gl/acwNcjczUBkrt5wPA' className="text-black text-sm sm:text-base md:text-lg underline mt-3">
+                        <Link href='https://maps.app.goo.gl/acwNcjczUBkrt5wPA' className="text-black text-xs sm:text-base md:text-lg underline mt-3">
                           Ubicación de la Parroquia - Horario misa:  12:00
                         </Link>
-                        <Link href='https://maps.app.goo.gl/ANZJ6hUrXoUfuDKTA' className="text-black text-sm sm:text-base md:text-lg  underline mt-3">
+                        <Link href='https://maps.app.goo.gl/ANZJ6hUrXoUfuDKTA' className="text-black text-xs sm:text-base md:text-lg  underline mt-3">
                           Ubicación del salón - Horario fiesta: 2:00
                         </Link>
                       </div>
