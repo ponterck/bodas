@@ -1,37 +1,36 @@
 import React, { useState } from 'react';
 
 const Host = () => {
-  const [hostName, setHostName] = useState('');
+  const [hostInfo, setHostInfo] = useState({});
 
-  const fetchHostName = async () => {
-    try {
-      const response = await fetch('/api/getHostName');
-      const data = await response.json();
-      let hostName = data.hostName;
-  
-      // Si el nombre parece una IP interna, intenta obtener la IP pública
-      if (hostName.startsWith('169.') || hostName.startsWith('172.')) {
-        const ipResponse = await fetch('https://api.ipify.org?format=json');
-        const ipData = await ipResponse.json();
-        hostName = ipData.ip;
-      }
-  
-      setHostName(hostName);
-    } catch (error) {
-      console.error('Error al obtener el nombre del equipo:', error);
-    }
+  const fetchHostInfo = () => {
+    const info = {
+      plataforma: navigator.platform,
+      userAgent: navigator.userAgent,
+      memoria: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'No disponible',
+      núcleosCPU: navigator.hardwareConcurrency || 'No disponible',
+    };
+
+    setHostInfo(info);
   };
-  console.log('hostName:', hostName);
 
   return (
     <div>
       <button 
-        style={{ backgroundColor: 'red', color: 'white' }} 
-        onClick={fetchHostName}
+        style={{ backgroundColor: 'red', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px' }} 
+        onClick={fetchHostInfo}
       >
-        Nombre del equipo
+        Obtener información del equipo
       </button>
-      {hostName && <p>{hostName}</p>}
+
+      {Object.keys(hostInfo).length > 0 && (
+        <div style={{ marginTop: '20px' }}>
+          <p><strong>Plataforma:</strong> {hostInfo.plataforma}</p>
+          <p><strong>Agente de usuario:</strong> {hostInfo.userAgent}</p>
+          <p><strong>Memoria:</strong> {hostInfo.memoria}</p>
+          <p><strong>Núcleos de CPU:</strong> {hostInfo.núcleosCPU}</p>
+        </div>
+      )}
     </div>
   );
 };
