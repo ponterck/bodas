@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
 import {
   Carousel,
@@ -11,18 +11,44 @@ import fotouno from '@/Asset/lupita/1.png';
 import fotodos from '@/Asset/lupita/2.png';
 import fototres from '@/Asset/lupita/3.png';
 import Link from 'next/link';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 export default function Home() {
+  const captureRef = useRef(null);
+  const handleDownloadPdf = async () => {
+    if (!captureRef.current) return;
+
+    const canvas = await html2canvas(captureRef.current);
+    const imgData = canvas.toDataURL('image/png');
+
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4',
+    });
+
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('captura.pdf');
+  };
   return (
     <>
       <div className="flex flex-col h-screen bg-white text-purple-600">
+      <button onClick={handleDownloadPdf}>
+            Descargar
+          </button>
         <main
           className="flex-grow flex justify-center items-center "
           style={{
             background: 'linear-gradient(to bottom, #a46ff9, #ffffff)',
           }}
         >
-          <div className="relative w-full max-w-4xl">
+
+          <div ref={captureRef} className="relative w-full max-w-4xl">
             <Carousel className="w-full">
               <CarouselContent>
                 {/* Primer Item */}

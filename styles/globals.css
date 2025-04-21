@@ -7,6 +7,36 @@
   --foreground: #171717;
 }
 
+.swal-popup-error {
+  border: 3px solid rgba(255, 0, 0, 0.6) !important; 
+  border-radius: 14px;
+}
+
+.swal-popup-succes {
+  border: 3px solid rgba(42, 168, 10, 0.6) !important; 
+  border-radius: 14px;
+}
+
+.swal-confirm-button {
+  padding: 10px;
+  width: 200px; /* Ancho del botón */
+  border-radius: 10px; /* Borde redondeado */
+  background-color: #4197CB;
+}
+
+
+
+.swal-title {
+  color: #5D6D7E;
+}
+
+.swal-icon-error {
+  color: #f8f8 !important; /* Rojo más intenso */
+  fill: #f8f8 !important;
+}
+
+
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
