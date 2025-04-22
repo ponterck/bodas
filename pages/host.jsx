@@ -17,32 +17,62 @@ const FormularioConValidacion = () => {
   const handleDownload = () => {
     if (!pdfMake) return;
 
-    const tableHeaders = ['ID', 'Nombre', 'Descripción', 'Activo', 'Rol por defecto', 'Creado en', 'Empresas'];
+    const tableHeaders = ['ID', 'Nombre', 'Usuario', 'Empresas', 'Plantillas', 'Creado en', 'Activo'];
 
     const tableBody = [
       tableHeaders,
-      ...data.map(item => ([
-        item.roleTemplateId,
-        item.roleTemplateName,
-        item.description || '-',
-        item.active ? 'Sí' : 'No',
-        item.defaultRole ? 'Sí' : 'No',
-        new Date(item.createdAt).toLocaleString(),
-        item.companies.map(c => `${c.item1} - ${c.item2}`).join(', ')
-      ]))
+      ...data.map(item => {
+        console.log('Item:', item);
+    
+        const companyNames = item.companies?.map(company => {
+          // Asegúrate de qué campos tiene cada empresa
+          return company.item1 ? `${company.item1} - ${company.item2}` : company.name || '-';
+        }).join(', ') || '-';
+        const templatecompanyNames =
+        item?.companies
+        ?.map((company) => {
+          const hasRoleTemplateNames = Array.isArray(company.roleTemplateNames) && company.roleTemplateNames.length > 0;
+          const hasIndividualClaims = Array.isArray(company.individualClaims) && company.individualClaims.length > 0;
+      
+          if (hasIndividualClaims && company.individualClaims.length > 1628) {
+            return "Rol Administrador";
+          }
+      
+          if (hasRoleTemplateNames) {
+            return company.roleTemplateNames.join(", ");
+          }
+      
+          if (hasIndividualClaims) {
+            return "Perfil Personalizado";
+          }
+      
+          return "No cuenta con permisos";
+        })
+        .join(" / ") || "No cuenta con permisos";
+        return [
+          item.id || '-',                 // Puede que no todos tengan este campo
+          item.fullName || '-',
+          item.userName || '-',
+          companyNames,
+          templatecompanyNames,
+          new Date(item.createdAt).toLocaleString(),
+          item.isActive ? 'Sí' : 'No',
+        ];
+      })
     ];
+    
 
     const docDefinition = {
       pageSize: 'A4',
       pageOrientation: 'landscape',
       pageMargins: [40, 60, 40, 60],
       content: [
-        { text: 'Reporte de Roles (sin claims)', style: 'header' },
+        { text: 'Reporte de Usuarios test', style: 'header' },
         {
           style: 'tableExample',
           table: {
             headerRows: 1,
-            widths: ['auto', 'auto', '*', 'auto', 'auto', 'auto', '*'],
+            widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
             body: tableBody
           },
           layout: {
